@@ -1,0 +1,133 @@
+##!/bin/bash
+#
+#WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+#MENU_LAUNCHER="rofi"
+#
+#SELECTED_WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) |
+#  "$MENU_LAUNCHER" -dmenu -i -p "Select Wallpaper:" -config wallpaper_switcher_config.rasi)
+#
+#if [[ -n "$SELECTED_WALLPAPER" ]]; then
+#  hyprctl hyprpaper reload ,"$SELECTED_WALLPAPER"
+#fi
+WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+CACHE_DIR="$HOME/.cache/wallpaper-selector"
+THUMBNAILS_DIR="$CACHE_DIR/thumbnails"
+THEME_PATH="$HOME/.config/rofi/wallpaper_switcher_config.rasi"
+MAX_PARALLEL_JOBS=4
+
+mkdir -p "$THUMBNAILS_DIR"
+
+generate_thumbnail() {
+  local image="$1"
+  local thumbnail="$THUMBNAILS_DIR/$(basename "${image%.*}").png"
+
+  [[ -f "$thumbnail" ]] || convert "$image" -resize 380x380^ -gravity center -extent 380x380 -strip -quality 85 "$thumbnail" 2>/dev/null
+}
+
+cleanup_orphaned_thumbnails() {
+  local -A valid_thumbnails
+
+  while IFS= read -r -d '' image; do
+    local thumbnail_name="$(basename "${image%.*}").png"
+    valid_thumbnails["$thumbnail_name"]=1
+  done < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0)
+
+  while IFS= read -r -d '' thumbnail; do
+    local thumbnail_name="$(basename "$thumbnail")"
+    [[ -z "${valid_thumbnails[$thumbnail_name]}" ]] && rm -f "$thumbnail"
+  done < <(find "$THUMBNAILS_DIR" -type f -name "*.png" -print0)
+}
+
+set_wallpaper() {
+  local wallpaper="$1"
+
+  hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
+  hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
+
+  # Removed wal and related reloads
+
+  echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
+}
+
+# set_wallpaper() {
+#   local wallpaper="$1"
+#
+#   hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
+#   hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
+#
+#   wal -i "$wallpaper" -q
+#
+#   pkill -SIGUSR2 waybar &
+#   pkill wofi &
+#
+#   for server in $(nvim --serverlist 2>/dev/null); do
+#     nvim --server "$server" --remote-send '<Esc>:colorscheme wal<CR>' 2>/dev/null &
+#   done
+#
+#   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
+# }
+
+main() {
+  [[ -d "$WALLPAPER_DIR" ]] || {
+    echo "Error: Wallpaper directory not found!"
+    exit 1
+  }
+
+  for cmd in convert rofi hyprctl; do
+    command -v "$cmd" &>/dev/null || {
+      echo "Error: $cmd not found"
+      exit 1
+    }
+  done
+
+  cleanup_orphaned_thumbnails
+
+  declare -A wallpaper_map
+  local entries=""
+  local current_wallpaper=""
+  [[ -f "$CACHE_DIR/current_wallpaper" ]] && current_wallpaper=$(cat "$CACHE_DIR/current_wallpaper")
+
+  local -a images
+  while IFS= read -r -d '' image; do
+    images+=("$image")
+  done < <(find "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) -print0 | sort -z)
+
+  local job_count=0
+  for image in "${images[@]}"; do
+    generate_thumbnail "$image" &
+    ((job_count++))
+
+    if ((job_count >= MAX_PARALLEL_JOBS)); then
+      wait -n
+      ((job_count--))
+    fi
+  done
+  wait
+
+  for image in "${images[@]}"; do
+    local name=$(basename "${image%.*}")
+    local thumbnail="$THUMBNAILS_DIR/${name}.png"
+
+    [[ -f "$thumbnail" ]] && {
+      wallpaper_map["$name"]="$image"
+      if [[ "$image" == "$current_wallpaper" ]]; then
+        entries+="● ${name}\0icon\x1f${thumbnail}\n"
+      else
+        entries+="${name}\0icon\x1f${thumbnail}\n"
+      fi
+    }
+  done
+
+  [[ ${#wallpaper_map[@]} -eq 0 ]] && {
+    echo "No wallpapers found"
+    exit 1
+  }
+  echo "DEBUG entries"
+  printf "%b" "$entries"
+  local selected=$(printf "%b" "$entries" | rofi -dmenu -i -p "Select Wallpaper" -show-icons -config "$THEME_PATH" 2>/dev/null)
+  selected="${selected#● }"
+
+  [[ -n "$selected" && -n "${wallpaper_map[$selected]}" ]] && set_wallpaper "${wallpaper_map[$selected]}"
+}
+
+main "$@"
