@@ -1,136 +1,130 @@
-// window {
-//     transparency: "real";
-//     location: center;
-//     anchor: center;
-//     fullscreen: false;
-// }
-
 configuration {
-    show-icons: true;
+    show-icons:                 true;
 }
 
 * {
-  background-color: transparent;
-  background-alt: #ffffff;
-  background: #000000;
-  foreground: rgb(206, 205, 195);
-  selected-normal-background: #333333;
-  selected-urgent-background: #555555;
-  selected-normal-foreground: #ffffff;
+    background-color:           transparent;
+    background-alt:             #ffffff;
+    background:                 #000000;
+    foreground:                 rgb(206, 205, 195);
+
+    selected-normal-background: #333333;
+    selected-urgent-background: #555555;
+    selected-normal-foreground: #ffffff;
 }
 
 window {
-    fullscreen: false;
-    location: center;
-    anchor: center;
-    border: none;
-    background-color: rgb(16, 15, 15);
-    padding: 20px;
-    width: 75%;
-    height: 50%;
-    border-radius: 20px;
+    fullscreen:                 false;
+    location:                   center;
+    anchor:                     center;
+
+    background-color:           rgb(16, 15, 15);
+
+    padding:                    20px;
+    width:                      75%;
+    height:                     50%;
+
+    border:                     none;
 }
 
 mainbox {
-  expand: true;
-  spacing: 0px;
-  // background-color: rgba(255,0,0,0.1);
-  orientation: vertical;
-  // padding: 3% 0%;
-  children: [listview];
+    expand:                     true;
+    spacing:                    0px;
+    orientation:                vertical;
+    children:                   [listview];
 }
 
 dummyTop, dummyBottom {
-  expand: true;
-  background-color: transparent;
+    expand:                     true;
+    background-color:           transparent;
 }
-// dummy{
-//   expand: true;
-  // background-color: transparent;
-// }
 
 listview {
-  expand: false;
-  lines: 1;
-  columns: 3;
-  padding: 0px 0px;
-  border: none;
-  flow: horizontal;
-  children: [element-icon];
-  padding: 3% 0%;
-  horizontal-align: 0.5;
-  vertical-align: 0.5;
-  scrollbar: false;
-  background-color: transparent;
+    expand:                     false;
+
+    lines:                      1;
+    columns:                    3;
+
+    border:                     none;
+    flow:                       horizontal;
+    children:                   [element-icon];
+    padding:                    3% 0%;
+
+    horizontal-align:           0.5;
+    vertical-align:             0.5;
+    scrollbar:                  false;
+
+    padding:                    0px 0px;
+    background-color:           transparent;
 }
 
 element {
-    orientation: vertical;
-    spacing: 8px;
-    padding: 8px;
-    border-radius: 20px;
-    background-color:transparent;
+    orientation:                vertical;
+
+    spacing:                    8px;
+    padding:                    8px;
+
+    border-radius:              20px;
+    background-color:           transparent;
 }
 
 element-icon {
-    size: 380px 380px;
-    margin: 0px;
-    padding: 0px;
-    border-radius: 20px;
-    horizontal-align: 0.5;
-}
-element.normal.normal,
-element.alternate.normal{
-    background-color: transparent;
+    size:                       380px 380px;
+
+    margin:                     0px;
+    padding:                    0px;
+
+    border-radius:              20px;
+    horizontal-align:           0.5;
 }
 
-// element.selected.normal{
-//     background-color: transparent;
-// }
-//
+element.normal.normal,
+element.alternate.normal{
+    background-color:           transparent;
+}
+
 element-text {
-    margin: 0px;
-    horizontal-align: 0.5;
-    padding: 4px 0px 0px 0px;
-    // background-color: #101010;
-    text-color: @foreground;
-    background-color: transparent;
-    font: "JetBrains Mono Medium 9";
+    margin:                     0px;
+    horizontal-align:           0.5;
+    padding:                    4px 0px 0px 0px;
+    text-color:                 @foreground;
+    background-color:           transparent;
+    font:                       "JetBrains Mono Medium 9";
 }
 
 element.selected.normal {
-    // background-color: @selected-normal-background;
-    background-color: transparent;
-    // border: 2px;
-    // border-color: white;
+    background-color:           transparent;
 }
 
 element-icon.selected{
-    border: 2px;
-  }
+    border:                     2px;
+}
 
 
 element.selected element-text {
-    background-color: @selected-urgent-background;
-    text-color: @selected-normal-foreground;
-    font: "JetBrains Mono Bold Italic 10";
+    background-color:           @selected-urgent-background;
+
+    text-color:                 @selected-normal-foreground;
+    font:                       "JetBrains Mono Bold Italic 10";
 }
 
 inputbar {
-    children: [prompt, entry, num-filtered-rows];
-    spacing: 8px;
-    padding: 12px;
-    margin: 16px 0px 0px 0px;
-    background-color: @background-alt;
-    border-radius: 8px;
+    spacing:                    8px;
+    padding:                    12px;
+    margin:                     16px 0px 0px 0px;
+
+    background-color:           @background-alt;
+    border-radius:              8px;
+
+    children:                   [prompt, entry, num-filtered-rows];
 }
 
 prompt {
-    text-color: @foreground;
-    font: "JetBrains Mono Italic 12";
+    text-color:                 @foreground;
+    font:                       "JetBrains Mono Italic 12";
 }
 
 num-filtered-rows {
-    text-color: @foreground;
-    font: "JetBrains Mono Italic 11";
+    text-color:                 @foreground;
+    font:                       "JetBrains Mono Italic 11";
 }

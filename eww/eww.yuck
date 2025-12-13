@@ -1,4 +1,3 @@
-;; (include "windows/music_controller.yuck")
-;; (include "variables/music_variables.yuck")
-;; (include "widgets/music_controller_widget.yuck")
-(include "player/player.yuck")
+(include "windows/player_windows.yuck")
+(include "widgets/player_widgets.yuck")
+(include "variables/player_variables.yuck")

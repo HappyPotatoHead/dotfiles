@@ -1,0 +1,12 @@
+;; Windows ;;
+(defwindow music
+  :monitor 0
+  :geometry
+  (geometry
+    :x "20px"
+    :y "20px"
+    :anchor "top right"
+  )
+	:wm-ignore true
+  (player)
+)

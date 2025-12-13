@@ -33,5 +33,4 @@ if [ -n "$selection" ]; then
   if [ -n "$CLIP_ID" ]; then
     cliphist decode "$CLIP_ID" | wl-copy
   fi
-  # echo "$selection" | cliphist decode | wl-copy
 fi

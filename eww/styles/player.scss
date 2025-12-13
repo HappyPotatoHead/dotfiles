@@ -1,127 +1,121 @@
 .player {
-  font-family: "JetBrains Mono Medium", "Material Design Icons Desktop";
-  background-color: #100f0f;
-  padding: 0.6rem;
-  min-height: 12rem;
-  background-color: rgb(16, 15, 15);
-  // background:
-    // linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)) padding-box,
-    // linear-gradient(45deg, rgba(204, 36, 29, 1.0), rgba(215, 153, 33, 1.0)) border-box;
-  border: 3px solid transparent;
-  border-radius: 3px;
+    font-family: "JetBrains Mono Medium", "Material Design Icons Desktop";
+    background-color: #100f0f;
+    padding: 0.6rem;
+    min-height: 12rem;
+    background-color: rgb(16, 15, 15);
+    border: 3px solid transparent;
+    border-radius: 3px;
 
-  .player-art {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    box-shadow: 0 0 0.3rem black;
-    border-radius: 1.2rem;
-    min-width: 22rem;
+    .player-art {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        box-shadow: 0 0 0.3rem black;
+        border-radius: 1.2rem;
+        min-width: 22rem;
 
-    .player-info {
-      border-radius: 1rem;
-      background: linear-gradient(to right,
-          rgb(#191919, 1),
-          rgba(#262626, 0.5));
-      padding: 0.65rem;
+        .player-info {
+            border-radius: 1rem;
+            background: linear-gradient(to right, rgb(#191919, 1), rgba(#262626, 0.5)); 
+            padding: 0.65rem;
 
-      .player-shuffle,
-      .player-loop {
-        font-size: 1rem;
-        text-shadow: 0 0 0.2rem black;
-      }
+            .player-shuffle,
+            .player-loop {
+                font-size: 1rem;
+                text-shadow: 0 0 0.2rem black;
+            }
 
-      .spotify-icon {
-        font-size: 1.25rem;
-        color: rgb(206, 205, 195);
-        text-shadow: 0 0 0.2rem black;
-      }
+            .spotify-icon {
+                font-size: 1.25rem;
+                color: rgb(206, 205, 195);
+                text-shadow: 0 0 0.2rem black;
+            }
 
-      .mpd-icon {
-        font-size: 1.25rem;
-        color: rgb(206, 205, 195);
-        text-shadow: 0 0 0.2rem black;
-      }
+            .mpd-icon {
+                font-size: 1.25rem;
+                color: rgb(206, 205, 195);
+                text-shadow: 0 0 0.2rem black;
+            }
 
-      .player-title {
-        font-style: italic;
-        font-family: Cartograph CF;
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: rgb(206, 205, 195);
-        text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
-      }
+            .player-title {
+                font-style: italic;
+                font-family: Cartograph CF;
+                font-size: 1.1rem;
+                font-weight: bold;
+                color: rgb(206, 205, 195);
+                text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
+            }
 
-      .player-artist {
-        font-family: JetBrainsMono NF;
-        font-weight: bolder;
-        font-size: 0.8rem;
-        color: rgb(206, 205, 195);
-        text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
-      }
+            .player-artist {
+                font-family: JetBrainsMono NF;
+                font-weight: bolder;
+                font-size: 0.8rem;
+                color: rgb(206, 205, 195);
+                text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
+            }
 
-      .player-time {
-        font-style: italic;
-        font-family: Cartograph CF;
-        font-size: 0.8rem;
-        color: rgb(206, 205, 195);
-        text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
-      }
+            .player-time {
+                font-style: italic;
+                font-family: Cartograph CF;
+                font-size: 0.8rem;
+                color: rgb(206, 205, 195);
+                text-shadow: 0 0 0.5rem rgba($color: #100f0f, $alpha: 0.5);
+            }
 
-      .player-bar scale trough highlight {
-        all: unset;
-        background-image: linear-gradient(to right,
-            darken($color: rgb(87, 86, 83), $amount: 15%),
-            rgb(206, 205, 195) );
-        border-radius: 2rem;
-      }
+            .player-bar scale trough highlight {
+                all: unset;
+                background-image: linear-gradient(to right, darken($color: rgb(87, 86, 83), $amount: 15%), rgb(206, 205, 195) );
+                border-radius: 2rem;
+            }
 
-      .player-bar scale trough {
-        all: unset;
-        background-color: rgba(rgb(206, 205, 195), 0.3);
-        box-shadow: 0px 0px 2px 1px rgba(black, 0.5);
-        border-radius: 1rem;
-        min-height: 0.35rem;
-        margin: 0rem 0.2rem 0.2rem 0rem;
-      }
+            .player-bar scale trough {
+                all: unset;
+                background-color: rgba(rgb(206, 205, 195), 0.3);
+                box-shadow: 0px 0px 2px 1px rgba(black, 0.5);
+                border-radius: 1rem;
+                min-height: 0.35rem;
+                margin: 0rem 0.2rem 0.2rem 0rem;
+            }
 
-      .player-position {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: rgb(206, 205, 195);
-      }
+            .player-position {
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: rgb(206, 205, 195);
+            }
+        }
     }
-  }
+}
 
 .min {
-  font-family: "JetBrainsMono Nerd Font";
-  font-size: 1.1rem;
-  padding: 0 0.9rem;
-  color: rgb(175, 48, 41);
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 1.1rem;
+    padding: 0 0.9rem;
+    color: rgb(175, 48, 41);
 }
 
 .min:hover {
-  color: rgb(94, 64, 157);
+    color: rgb(94, 64, 157);
 }
 
-  .player-controls {
+.player-controls {
     padding: 0rem 0.7rem 0rem 1rem;
     border-radius: 1rem;
 
     .player-toggle {
-      font-size: 1.6rem;
-      color: rgb(206, 205, 195);
+        font-size: 1.6rem;
+        color: rgb(206, 205, 195);
     }
 
     .player-previous,
     .player-next {
-      font-size: 1.6rem;
-      color: rgb(206, 205, 195);
+        font-size: 1.6rem;
+        color: rgb(206, 205, 195);
     }
 
     button {
-      &:hover {
-        color: rgb(87, 86, 83);
+        &:hover {
+            color: rgb(87, 86, 83);
       }
     }
   }

@@ -1,10 +1,10 @@
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser";
+    modi:                       "drun,run,filebrowser";
     display-drun:               "";
     display-run:                "";
     display-filebrowser:        "󰝰 ";
-	show-icons: true;
+    show-icons: true;
 }
 
 * {
@@ -30,8 +30,6 @@ window {
     transparency:                "real";
     location:                    center;
     anchor:                      center;
-    // border:                      0px;
-    // border-color:                @foreground;
     fullscreen:                  false;
     width:                       50%;
     height:                      70%; 

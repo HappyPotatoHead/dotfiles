@@ -1,14 +1,5 @@
 ##!/bin/bash
-#
-#WALLPAPER_DIR="$HOME/Pictures/wallpapers"
-#MENU_LAUNCHER="rofi"
-#
-#SELECTED_WALLPAPER=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" \) |
-#  "$MENU_LAUNCHER" -dmenu -i -p "Select Wallpaper:" -config wallpaper_switcher_config.rasi)
-#
-#if [[ -n "$SELECTED_WALLPAPER" ]]; then
-#  hyprctl hyprpaper reload ,"$SELECTED_WALLPAPER"
-#fi
+
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 CACHE_DIR="$HOME/.cache/wallpaper-selector"
 THUMBNAILS_DIR="$CACHE_DIR/thumbnails"
@@ -48,24 +39,6 @@ set_wallpaper() {
 
   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
 }
-
-# set_wallpaper() {
-#   local wallpaper="$1"
-#
-#   hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
-#   hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
-#
-#   wal -i "$wallpaper" -q
-#
-#   pkill -SIGUSR2 waybar &
-#   pkill wofi &
-#
-#   for server in $(nvim --serverlist 2>/dev/null); do
-#     nvim --server "$server" --remote-send '<Esc>:colorscheme wal<CR>' 2>/dev/null &
-#   done
-#
-#   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
-# }
 
 main() {
   [[ -d "$WALLPAPER_DIR" ]] || {
