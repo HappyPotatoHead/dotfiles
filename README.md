@@ -2,7 +2,7 @@
 
 Note that this isn't plug and play; it's been heavily customised to my own preferences.
 
-> It should be obvious that they're not very *modular*.
+> It should be obvious that they're not very _modular_.
 
 ## Info
 
@@ -12,7 +12,7 @@ Note that this isn't plug and play; it's been heavily customised to my own prefe
 - Notification: mako
 - Terminal: kitty
 - Shell: bash
-- Font: *Can't remember sorry!*
+- Font: _Can't remember sorry!_
 - System information: fastfetch
 
 References/Sources:

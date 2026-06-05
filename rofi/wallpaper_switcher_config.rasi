@@ -4,10 +4,9 @@ configuration {
 
 * {
     background-color:           transparent;
-    background-alt:             #ffffff;
-    background:                 #000000;
-    foreground:                 rgb(206, 205, 195);
-
+    background-alt:             #FFFCF0;
+    background:                 #100F0F;
+    foreground:                 #CECDC3;
     selected-normal-background: #333333;
     selected-urgent-background: #555555;
     selected-normal-foreground: #ffffff;
@@ -17,69 +16,57 @@ window {
     fullscreen:                 false;
     location:                   center;
     anchor:                     center;
-
-    background-color:           rgb(16, 15, 15);
-
+    border:                     none;
+    background-color:           rgba(16, 15, 15, 0.5);
     padding:                    20px;
     width:                      75%;
     height:                     50%;
-
-    border:                     none;
+    border-radius:              20px;
 }
 
 mainbox {
     expand:                     true;
     spacing:                    0px;
     orientation:                vertical;
-    children:                   [listview];
+    children:                   [listview, inputbar];
 }
 
-dummyTop, dummyBottom {
+dummyTop {
     expand:                     true;
     background-color:           transparent;
 }
 
 listview {
-    expand:                     false;
-
+    expand:                     true;
     lines:                      1;
     columns:                    3;
-
+    padding:                    0px;
+    margin:                     0px;
     border:                     none;
     flow:                       horizontal;
-    children:                   [element-icon];
-    padding:                    3% 0%;
-
     horizontal-align:           0.5;
-    vertical-align:             0.5;
     scrollbar:                  false;
-
-    padding:                    0px 0px;
     background-color:           transparent;
 }
 
 element {
     orientation:                vertical;
-
     spacing:                    8px;
     padding:                    8px;
-
     border-radius:              20px;
     background-color:           transparent;
 }
 
 element-icon {
-    size:                       380px 380px;
-
+    size:                       300px 360px;
     margin:                     0px;
     padding:                    0px;
-
     border-radius:              20px;
     horizontal-align:           0.5;
 }
 
 element.normal.normal,
-element.alternate.normal{
+element.alternate.normal {
     background-color:           transparent;
 }
 
@@ -96,27 +83,23 @@ element.selected.normal {
     background-color:           transparent;
 }
 
-element-icon.selected{
+element-icon.selected {
     border:                     2px;
 }
 
-
 element.selected element-text {
     background-color:           @selected-urgent-background;
-
     text-color:                 @selected-normal-foreground;
     font:                       "JetBrains Mono Bold Italic 10";
 }
 
 inputbar {
+    children:                   [prompt, entry, num-filtered-rows];
     spacing:                    8px;
     padding:                    12px;
-    margin:                     16px 0px 0px 0px;
-
-    background-color:           @background-alt;
+    margin:                     0px 0px 0px 0px;
+    background-color:           @background;
     border-radius:              8px;
-
-    children:                   [prompt, entry, num-filtered-rows];
 }
 
 prompt {

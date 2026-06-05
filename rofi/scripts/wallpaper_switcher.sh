@@ -1,4 +1,4 @@
-##!/bin/bash
+#!/usr/bin/env bash
 
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 CACHE_DIR="$HOME/.cache/wallpaper-selector"
@@ -28,17 +28,52 @@ cleanup_orphaned_thumbnails() {
     [[ -z "${valid_thumbnails[$thumbnail_name]}" ]] && rm -f "$thumbnail"
   done < <(find "$THUMBNAILS_DIR" -type f -name "*.png" -print0)
 }
-
 set_wallpaper() {
   local wallpaper="$1"
 
+  # Preload the wallpaper if it isn't already loaded
   hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
-  hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
 
-  # Removed wal and related reloads
+  # Get all active monitor names (e.g., eDP-1, HDMI-A-1)
+  # This filters the 'Monitor' lines and extracts the name
+  local monitors=$(hyprctl monitors | grep "Monitor" | awk '{print $2}')
 
+  # Apply the wallpaper to every connected monitor
+  for monitor in $monitors; do
+    hyprctl hyprpaper wallpaper "$monitor,$wallpaper"
+  done
+
+  # Save to cache
   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
 }
+# set_wallpaper() {
+#   local wallpaper="$1"
+#
+#   hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
+#   hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
+#
+#   # Removed wal and related reloads
+#
+#   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
+# }
+
+# set_wallpaper() {
+#   local wallpaper="$1"
+#
+#   hyprctl hyprpaper listloaded | grep -q "$wallpaper" || hyprctl hyprpaper preload "$wallpaper"
+#   hyprctl hyprpaper wallpaper "eDP-1,$wallpaper"
+#
+#   wal -i "$wallpaper" -q
+#
+#   pkill -SIGUSR2 waybar &
+#   pkill wofi &
+#
+#   for server in $(nvim --serverlist 2>/dev/null); do
+#     nvim --server "$server" --remote-send '<Esc>:colorscheme wal<CR>' 2>/dev/null &
+#   done
+#
+#   echo "$wallpaper" >"$CACHE_DIR/current_wallpaper"
+# }
 
 main() {
   [[ -d "$WALLPAPER_DIR" ]] || {

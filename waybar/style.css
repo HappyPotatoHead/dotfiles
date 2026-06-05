@@ -1,164 +1,203 @@
-/* @import url("styles/config.css"); */
 /* --- Global Styles --- */
 
 * {
-    font-family:                'NotoSansM NFP SemBd','NotoSansM Nerd Font Propo','NotoSansM NFP',sans-serif;
-    font-size:                  16px;
-    min-height:                 0;
-    padding-right:              0px;
-    padding-left:               0px;
-    padding-bottom:             0px;
+    font-family:
+        "NotoSansM NFP SemBd", "NotoSansM Nerd Font Propo", "NotoSansM NFP",
+        sans-serif;
+    font-size: 14px;
+    min-height: 0;
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-bottom: 0px;
 }
 
 /* --- Waybar Container --- */
 window {
-    background-color:           rgb(16, 15, 15);
-    color:                      #faf9f6;
-    margin:                     0px;
-    font-weight:                500;
-    padding:                    0;
-
-    border-bottom-left-radius:  20px;
-    border-bottom-right-radius: 20px;
+    background-color: transparent;
+    color: #fffcf0;
+    margin-right: 0px;
+    font-weight: 500;
+    padding: 0;
+    border: 2px solid #100f0f;
+    border-radius: 4px;
 }
 
 /* --- Left Modules --- */
+#left {
+    background-color: transparent;
+    padding-right: 0.5rem;
+}
+
 #clock,
 #custom-uptime,
 #memory,
 #cpu {
-    background-color:           transparent;
-    padding:                    0.3rem 0.7rem;
-    margin:                     5px 0px;
-    min-width:                  0;
-    transition:                 background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    border-left:                1px solid rgba(0,0,0,1);
-    color:                      rgb(206, 205, 195);
+    padding: 0.3rem 0.7rem;
+    margin: 5px 0px;
+    min-width: 0;
+    transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-in-out;
+    color: #100f0f;
 }
 
 #clock {
-    font-weight:                500;
-    border:                     none;
-    border-bottom-left-radius:  20px;
+    font-weight: 500;
+    border: none;
 }
 
-#clock:hover {
-    color:                      rgb(87, 86, 83);
+#clock:hover,
+#custom-uptime:hover {
+    color: #878580;
 }
 
-#cpu{
-    transition:                 border 0.2s ease-in-out;
+#cpu {
+    transition: border 0.2s ease-in-out;
 }
 
 #cpu:hover {
-    color:                      rgb(87, 86, 83);
+    color: #575653;
 }
 
-/*  --- Middle Modules --- */
 #workspaces {
-    background-color:           transparent;
-    padding:                    2px;
-    margin-left:                7px;
+    padding: 0.3rem 0.7rem;
+    margin: 5px 0px;
 }
 
 #workspaces button {
-    color:                      rgb(135, 133, 128);
-    padding:                    0.3rem 0.6rem;
-    background:                 transparent;
-    transition:                 all 0.2s ease-in-out;
-    border:                     none;
-    outline:                    none;
-    border-radius:              0;
+    padding: 0.3rem 0.6rem;
+    margin: 0 0.3rem;
+    background: transparent;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    outline: none;
+    border-radius: 4px;
 }
 
-#workspaces button.active {
-    color:                      rgb(206, 205, 195);
-    background-color:           rgba(153, 209, 219, 0.1);
-    border-bottom:              2px solid rgb(206, 205, 195);
+#workspaces button.persistent:hover {
+    color: #878580;
 }
 
-#workspaces button:hover {
-    color:                     rgb(206, 205, 195);
-    border-bottom:             2px solid rgb(87, 86, 83);
+/* Non empty persistent workspaces */
+#workspaces button.persistent{
+    color: #d14d41;
 }
 
-/* --- Right Modules (Single, Seamless Bar ) --- */
-#custom-music,
+/* empty persistent workspaces */
+#workspaces button.empty{
+    color: #879a39;
+}
+
+/* active or visible */
+#workspaces button.active, 
+#workspaces button.visible {
+    color:#cecdc3;
+    background-color: #100f0f;
+}
+
+#workspaces button.urgent{
+    color: #da702c;
+}
+
+/*Middle module*/
+#custom-music {
+    color: #100f0f;
+    padding: 0.5rem 2rem;
+}
+
+/* --- Right Modules --- */
+#right {
+    color: #100f0f;
+}
+
 #bluetooth,
 #network,
 #pulseaudio,
 #backlight,
-#battery, 
+#battery,
 #custom-lock {
-    background-color:         transparent;
-    color:                    rgb(206, 205, 195);
-    padding:                  0.3rem 0.7rem;
-    margin:                   5px 0px; 
-    border-radius:            0px;
-    box-shadow:               none;
-    min-width:                0;
-    border:                   none;
-    transition:               background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-    border-left:              1px solid rgba(0,0,0,1); 
+    background-color: transparent;
+    padding: 0.3rem 0.7rem;
+    margin: 5px 4px;
+    transition:
+        background-color 0.2s ease-in-out,
+        color 0.2s ease-in-out;
 }
 
-#custom-music:hover,
 #bluetooth:hover,
 #pulseaudio:hover,
 #backlight:hover,
-#network:hover,
-#custom-lock:hover,
-#battery:hover {
-    color:                    rgb(87, 86, 83);
+#network:hover{
+    color: #878580;
 }
 
-#custom-music{
-    border:                   none;
+#battery:hover {
+    color: #879a39;
+}
+
+#custom-lock:hover{
+    color:#d14d41;
 }
 
 #bluetooth {
-    margin-left:              0px;
-    color:                    #7393B3;
+    color: #7393b3;
 }
 
 #network.disconnected {
-    color:                      #e78284;
+    color: #d14d41;
 }
 
-
 #bluetooth {
-    font-size:              16px;
+    font-size: 16px;
 }
 
 #bluetooth.on {
-    color:                  rgb(32, 94, 166);
+    color: #205ea6;
 }
 
 #bluetooth.connected {
-    color:                  #2D3F53;
+    color: #1a4f8c;
 }
-
 
 #battery.charging {
-    color:                  #228B22;
+    color: #879a39;
 }
-
+#battery.critical:not(.charging) { 
+    color: #d14d41;
+}
 #battery.warning:not(.charging) {
-    color:                  #e78284;
+    color: #da702c;
+}
+#battery.safe:not(.charging){
+    color: #d0a215;
+}
+#battery.high:not(.charging) {
+    color: #3D4C07;
 }
 
-#custom-lock{
-	  margin-right:           8px;
+#custom-lock {
+    margin-right: 8px;
+}
+
+#backlight.low {
+    color: #575653;
+}
+
+#backlight.medium {
+    color: #878580;
+}
+
+#backlight.bright {
+    color: #d0a215;
 }
 
 /* --- Tooltip Styles --- */
 tooltip {
-    background-color:       #1a1b26;
-    color:                  #dddddd;
-    padding:                5px 12px;
-    margin:                 5px 0px;
-    border-radius:          6px;
-    border:                 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow:             0 4px 12px rgba(0, 0, 0, 0.2);
-    font-size:              12px;
+    background-color: #1a1b26;
+    color: #dddddd;
+    padding: 5px 12px;
+    margin: 5px 0px;
+    border: 1px solid #ffffff1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
 }
