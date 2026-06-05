@@ -9,6 +9,7 @@
     foreground-sec: #878580;
     foreground-tri: #575653;
 }
+
 window {
     transparency: "real";
     location: south east;
